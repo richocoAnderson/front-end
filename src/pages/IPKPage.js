@@ -10,6 +10,14 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import TextField from '@mui/material/TextField';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -62,6 +70,7 @@ const IPKPages = () => {
     setSearchTerm(event.target.value);
   };
 
+  
   // Filtering data based on search term
   const filteredIpkList = ipkList.filter((ipk) =>
     ipk.nama.toLowerCase().includes(searchTerm.toLowerCase())
@@ -96,8 +105,90 @@ function CustomizedTables({
   handleChangePage,
   handleChangeRowsPerPage,
 }) {
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    maxHeight: '80vh', // Set maximum height of modal content
+    overflowY: 'auto', // Enable vertical scroll if content exceeds modal height
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = React.useState(false);
+  const [selectedData, setSelectedData] = React.useState(null);
+
+  const handleOpen = (data) => {
+    setSelectedData(data);
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+
   return (
     <>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <DialogTitle id="modal-modal-title">Detail Mahasiswa</DialogTitle>
+          <DialogContent dividers>
+            {selectedData && (
+              <>
+                <DialogContentText id="modal-modal-description">
+                  NIM: {selectedData.nim}
+                </DialogContentText>
+                <DialogContentText id="modal-modal-description">
+                  Nama: {selectedData.nama}
+                </DialogContentText>
+                <DialogContentText id="modal-modal-description">
+                  Jurusan: {selectedData.jurusan}
+                </DialogContentText>
+                <DialogContentText id="modal-modal-description">
+                  IPK: {selectedData.ipk}
+                </DialogContentText>
+                <Typography variant="h6" sx={{ mt: 2 }}>
+                  Mata Kuliah Diambil:
+                </Typography>
+                <TableContainer component={Paper} sx={{ mt: 2 }}>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Kode MK</TableCell>
+                        <TableCell>Mata Kuliah</TableCell>
+                        <TableCell>Jenis MK</TableCell>
+                        <TableCell>SKS MK</TableCell>
+                        <TableCell>Nilai Bobot</TableCell>
+                        <TableCell>Nilai</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {selectedData.matkulDiambil.map((matkul, index) => (
+                        <TableRow key={index}>
+                          <TableCell>{matkul.kodeMk}</TableCell>
+                          <TableCell>{matkul.matkul}</TableCell>
+                          <TableCell>{matkul.jenisMk}</TableCell>
+                          <TableCell>{matkul.sksMk}</TableCell>
+                          <TableCell>{matkul.nilaBobot}</TableCell>
+                          <TableCell>{matkul.nilai}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </>
+            )}
+          </DialogContent>
+        </Box>
+      </Modal>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -107,6 +198,7 @@ function CustomizedTables({
               <StyledTableCell>Nama</StyledTableCell>
               <StyledTableCell>Jurusan</StyledTableCell>
               <StyledTableCell>IPK</StyledTableCell>
+              <StyledTableCell>Action</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -120,7 +212,12 @@ function CustomizedTables({
                   <StyledTableCell>{ipk.nim}</StyledTableCell>
                   <StyledTableCell>{ipk.nama}</StyledTableCell>
                   <StyledTableCell>{ipk.jurusan}</StyledTableCell>
-                  <StyledTableCell>{ipk.ipk}</StyledTableCell>
+                  <StyledTableCell>{ipk.ipk ? ipk.ipk : "0"}</StyledTableCell>
+                  <StyledTableCell>
+                  <Button onClick={() => handleOpen(ipk)}>
+                      <OpenInNewIcon />
+                    </Button>
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
           </TableBody>
