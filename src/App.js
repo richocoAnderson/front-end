@@ -12,9 +12,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<PersistentDrawerLeft />} />
           {/* Jika route tidak sesuai, arahkan ke halaman login */}
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
-
       </Router>
     </AuthProvider>
   );

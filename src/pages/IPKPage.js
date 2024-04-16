@@ -43,17 +43,21 @@ const IPKPages = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getIPKs = async () => {
       try {
+        setLoading(true); // Set loading to true before fetching data
         const data = await fetchIPKs();
         setIpkList(data);
+        setLoading(false); // Set loading to false after data is fetched
       } catch (error) {
+        setLoading(false); // Set loading to false if there's an error
         // Handle error
       }
     };
-
+  
     getIPKs();
   }, []);
 
@@ -87,13 +91,17 @@ const IPKPages = () => {
         onChange={handleSearchChange}
         sx={{ mb: 2 }}
       />
-      <CustomizedTables
-        ipkList={filteredIpkList}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        handleChangePage={handleChangePage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
-      />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <CustomizedTables
+          ipkList={filteredIpkList}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      )}
     </div>
   );
 };
