@@ -33,7 +33,7 @@ const addMatakuliah = async (mataKuliah, sks, jenisMk, semesterMk) => {
 const DisplayMatkul = async () => {
     try {
       const apiKey = 'sayaLaparBang123'; // Ganti dengan API key Anda
-      const response = await fetch('http://localhost:8080/displayMataKuliah', {
+      const response = await fetch('https://pengujianperangkatlunak2024-chcivh4gzq-et.a.run.app/displayMataKuliah', {
         method: 'GET',
         headers: {
           'x-api-key': apiKey // Gunakan API key sebagai header x-api-key

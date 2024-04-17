@@ -9,7 +9,7 @@ const addKRS = async (kodeMk, semesterKRS, nim, nilai, sks) => {
         sks
       };
   
-      const response = await fetch('http://localhost:8080/addKRS', {
+      const response = await fetch('https://pengujianperangkatlunak2024-chcivh4gzq-et.a.run.app/addKRS', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

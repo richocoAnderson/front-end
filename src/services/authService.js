@@ -1,6 +1,6 @@
 // authService.js
 export const login = async (email, password) => {
-    const apiUrl = 'http://localhost:8080/login';
+    const apiUrl = 'https://pengujianperangkatlunak2024-chcivh4gzq-et.a.run.app/login';
     const apiKey = 'sayaLaparBang123';
   
     try {

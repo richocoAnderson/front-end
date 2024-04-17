@@ -8,7 +8,7 @@ const addMahasiswa = async (nim, nama, jurusan, jenisKelamin) => {
         jenisKelamin
       };
   
-      const response = await fetch('http://localhost:8080/addMahasiswa', {
+      const response = await fetch('https://pengujianperangkatlunak2024-chcivh4gzq-et.a.run.app/addMahasiswa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
