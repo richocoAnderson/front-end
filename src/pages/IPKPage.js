@@ -182,7 +182,7 @@ function CustomizedTables({
                       {selectedData.matkulDiambil.map((matkul, index) => (
                         <TableRow key={index}>
                           <TableCell>{matkul.kodeMk}</TableCell>
-                          <TableCell>{matkul.matkul}</TableCell>
+                          <TableCell>{matkul.mataKuliah}</TableCell>
                           <TableCell>{matkul.jenisMk}</TableCell>
                           <TableCell>{matkul.sksMk}</TableCell>
                           <TableCell>{matkul.nilaBobot}</TableCell>

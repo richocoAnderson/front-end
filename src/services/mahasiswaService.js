@@ -8,7 +8,7 @@ const addMahasiswa = async (nim, nama, jurusan, jenisKelamin) => {
         jenisKelamin
       };
   
-      const response = await fetch('https://pengujianperangkatlunak2024-chcivh4gzq-et.a.run.app/addMahasiswa', {
+      const response = await fetch('https://asia-southeast2-pengujianperangkatlunak2024.cloudfunctions.net/api-backend/add-mahasiswa', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ const addMahasiswa = async (nim, nama, jurusan, jenisKelamin) => {
   const DisplayMahasiswa = async () => {
     try {
       const apiKey = 'sayaLaparBang123'; // Ganti dengan API key Anda
-      const response = await fetch('http://localhost:8080/displayAllMahasiswa', {
+      const response = await fetch('https://asia-southeast2-pengujianperangkatlunak2024.cloudfunctions.net/api-backend/ipk/get-mahasiswa', {
         method: 'GET',
         headers: {
           'x-api-key': apiKey // Gunakan API key sebagai header x-api-key

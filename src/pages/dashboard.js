@@ -22,7 +22,6 @@ import Person from '@mui/icons-material/Person4';
 import Matkul from '@mui/icons-material/Subject'
 import IPKPages from './IPKPage';
 import AddMahasiswaPage from './addMahasiswaPage';
-import LogoutButton from '../components/LogoutButton';
 import AddMatakuliahPage from '../pages/addMatkul';
 import AddKRSPage from './addKrsPage';
 
@@ -160,7 +159,6 @@ export default function PersistentDrawerLeft() {
               </ListItem>
             ))}
           </List>
-          <LogoutButton/>
         <Divider />
       </Drawer>
       <Main open={open}>
